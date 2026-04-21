@@ -23,81 +23,83 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center p-4 bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300">
-      <div className="w-full max-w-[420px] bg-white dark:bg-zinc-900 aspect-square flex flex-col items-center justify-center p-8 rounded-[40px] shadow-2xl shadow-zinc-200 dark:shadow-none border border-zinc-100 dark:border-zinc-800">
+    <div className="min-h-[85vh] flex items-center justify-center p-4 bg-white dark:bg-slate-950 transition-colors duration-500 relative overflow-hidden">
+      <div className="w-full max-w-[480px] min-h-[650px] bg-white/40 dark:bg-red-950/20 backdrop-blur-2xl flex flex-col items-center justify-center p-10 sm:p-14 rounded-[3.5rem] shadow-[0_40px_80px_-20px_rgba(239,68,68,0.15)] dark:shadow-red-500/10 border-2 border-red-400 dark:border-red-500/40 relative z-10 overflow-hidden">
+        {/* Subtle Gradient Glow */}
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-red-500/10 rounded-full blur-[40px]" />
         
         {/* Header */}
-        <div className="flex flex-col items-center mb-6">
-          <div className="p-3 rounded-2xl bg-indigo-600 text-white mb-4">
-            <FiCode className="w-6 h-6" />
+        <div className="flex flex-col items-center mb-8">
+          <div className="p-3.5 rounded-2xl bg-red-600 text-white mb-5 shadow-xl shadow-red-600/20">
+            <FiCode className="w-7 h-7" />
           </div>
-          <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Create Account</h1>
-          <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1">Join the D-Code community</p>
+          <h1 className="text-3xl font-black text-slate-950 dark:text-white tracking-tighter">Create Account</h1>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-2 font-semibold tracking-tight">Join the D-Code community today</p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleComingSoon} className="w-full space-y-3">
-          <div className="relative">
-            <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
+        <form onSubmit={handleComingSoon} className="w-full space-y-4">
+          <div className="relative group">
+            <FiUser className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-500 transition-colors" />
             <input
               type="text"
               required
               placeholder="Your Name"
-              className="w-full pl-12 pr-4 py-3.5 rounded-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 text-sm transition-all text-zinc-900 dark:text-white"
+              className="w-full pl-14 pr-6 py-4 rounded-full bg-white/50 dark:bg-slate-800/30 border border-red-200 dark:border-red-500/30 focus:outline-none focus:ring-2 focus:ring-red-500/50 dark:focus:ring-red-400/50 text-sm transition-all text-slate-900 dark:text-white font-medium placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm"
               aria-label="Full Name"
             />
           </div>
 
-          <div className="relative">
-            <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
+          <div className="relative group">
+            <FiMail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-500 transition-colors" />
             <input
               type="email"
               required
               placeholder="name@example.com"
-              className="w-full pl-12 pr-4 py-3.5 rounded-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 text-sm transition-all text-zinc-900 dark:text-white"
+              className="w-full pl-14 pr-6 py-4 rounded-full bg-white/50 dark:bg-slate-800/30 border border-red-200 dark:border-red-500/30 focus:outline-none focus:ring-2 focus:ring-red-500/50 dark:focus:ring-red-400/50 text-sm transition-all text-slate-900 dark:text-white font-medium placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm"
               aria-label="Email Address"
             />
           </div>
 
-          <div className="relative">
-            <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
+          <div className="relative group">
+            <FiLock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-500 transition-colors" />
             <input
               type="password"
               required
               placeholder="Create a password"
-              className="w-full pl-12 pr-4 py-3.5 rounded-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 text-sm transition-all text-zinc-900 dark:text-white"
+              className="w-full pl-14 pr-6 py-4 rounded-full bg-white/50 dark:bg-slate-800/30 border border-red-200 dark:border-red-500/30 focus:outline-none focus:ring-2 focus:ring-red-500/50 dark:focus:ring-red-400/50 text-sm transition-all text-slate-900 dark:text-white font-medium placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm"
               aria-label="Password"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-4 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-600/20 transition-all hover:scale-[1.02] active:scale-95 mt-2"
+            className="w-full py-4.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-black text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 transition-all hover:scale-[1.02] active:scale-95 mt-4"
           >
             Create Account
           </button>
         </form>
 
         {/* Divider */}
-        <div className="w-full flex items-center gap-4 my-5">
-          <div className="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
-          <span className="text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-widest font-bold text-[10px]">OR</span>
-          <div className="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
+        <div className="w-full flex items-center gap-5 my-8">
+          <div className="h-px grow bg-slate-200 dark:bg-slate-800"></div>
+          <span className="text-[10px] text-slate-500 dark:text-slate-500 uppercase tracking-[0.2em] font-black">OR</span>
+          <div className="h-px grow bg-slate-200 dark:bg-slate-800"></div>
         </div>
 
         {/* Google Button */}
         <button
           onClick={handleGoogleClick}
-          className="w-full py-3.5 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-semibold text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all flex items-center justify-center gap-2"
+          className="w-full py-4 rounded-full bg-white/50 dark:bg-slate-800/30 border border-slate-200/50 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 font-bold text-sm uppercase tracking-widest hover:bg-white dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-3 shadow-sm"
         >
-          <FcGoogle className="w-5 h-5" />
+          <FcGoogle className="w-6 h-6" />
           Signup with Google
         </button>
 
         {/* Footer Link */}
-        <p className="mt-6 text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="mt-8 text-sm text-slate-500 dark:text-slate-500 font-medium">
           Already have an account?{' '}
-          <Link href="/login" className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">
+          <Link href="/login" className="text-red-600 dark:text-red-400 font-black hover:underline underline-offset-4">
             Login
           </Link>
         </p>

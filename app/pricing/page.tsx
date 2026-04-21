@@ -25,7 +25,7 @@ const PricingPage = () => {
       features: ["Unlimited Projects", "Private Shares", "Priority Support", "Advanced Editor", "10GB Storage", "Cloud Sync"],
       button: "Get Started",
       popular: true,
-      color: "from-indigo-600 to-purple-600"
+      color: "from-red-600 to-rose-600"
     },
     {
       name: "Team",
@@ -57,26 +57,26 @@ const PricingPage = () => {
     <div className="container mx-auto px-4 py-20 animate-in fade-in duration-700">
       
       {/* Header & Toggle */}
-      <div className="text-center mb-16">
-        <h1 className="text-5xl md:text-7xl font-black text-zinc-900 dark:text-white mb-6 tracking-tight">
-          Choose Your <span className="text-indigo-600">Plan</span>
+      <div className="text-center mb-24">
+        <h1 className="text-6xl md:text-[8rem] font-black text-slate-950 dark:text-white mb-8 tracking-tighter leading-[0.9]">
+          Choose Your <span className="text-red-600">Plan</span>
         </h1>
-        <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-lg mb-12">
-          Unlock the full potential of D-Code with our flexible pricing options.
+        <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-xl font-semibold tracking-tight mb-16">
+          Unlock the full potential of D-Code with our flexible, <br className="hidden md:block" /> precision-engineered pricing options.
         </p>
 
         {/* Custom Toggle */}
-        <div className="flex items-center justify-center gap-4 mb-8">
-          <span className={`text-sm font-bold ${!isYearly ? 'text-indigo-600' : 'text-zinc-500'}`}>Monthly</span>
+        <div className="flex items-center justify-center gap-6 mb-12 scale-110">
+          <span className={`text-xs font-black uppercase tracking-widest transition-colors duration-500 ${!isYearly ? 'text-red-600' : 'text-slate-400'}`}>Monthly</span>
           <button
             onClick={() => setIsYearly(!isYearly)}
-            className="w-14 h-8 rounded-full bg-zinc-200 dark:bg-zinc-800 p-1 transition-colors relative"
+            className="w-16 h-9 rounded-full bg-slate-200 dark:bg-slate-800 p-1.5 transition-all duration-500 relative shadow-inner"
           >
-            <div className={`w-6 h-6 rounded-full bg-indigo-600 transition-all duration-300 transform ${isYearly ? 'translate-x-6' : 'translate-x-0'}`} />
+            <div className={`w-6 h-6 rounded-full bg-red-600 shadow-lg shadow-red-600/40 transition-all duration-500 transform ${isYearly ? 'translate-x-7' : 'translate-x-0'}`} />
           </button>
-          <div className="flex items-center gap-2">
-            <span className={`text-sm font-bold ${isYearly ? 'text-indigo-600' : 'text-zinc-500'}`}>Yearly</span>
-            <span className="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase">
+          <div className="flex items-center gap-3">
+            <span className={`text-xs font-black uppercase tracking-widest transition-colors duration-500 ${isYearly ? 'text-red-600' : 'text-slate-400'}`}>Yearly</span>
+            <span className="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-tighter border border-emerald-500/20">
               Save 20%
             </span>
           </div>
@@ -88,40 +88,40 @@ const PricingPage = () => {
         {plans.map((plan) => (
           <div
             key={plan.name}
-            className={`group relative p-8 rounded-[40px] border transition-all duration-500 hover:translate-y-[-8px] ${
+            className={`group relative p-10 rounded-[3rem] border transition-all duration-700 hover:translate-y-[-12px] bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl ${
               plan.popular 
-                ? 'bg-zinc-900 border-zinc-800 shadow-2xl shadow-indigo-500/20' 
-                : 'bg-white dark:bg-zinc-950/50 border-zinc-200 dark:border-zinc-800'
+                ? 'border-red-500/50 shadow-2xl shadow-red-600/10 dark:shadow-red-500/5 ring-2 ring-red-500/20' 
+                : 'border-slate-200/50 dark:border-slate-800/50 shadow-sm'
             }`}
           >
             {plan.popular && (
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-2 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-full text-xs font-black uppercase tracking-widest shadow-xl">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-2 bg-linear-to-r from-red-600 to-rose-600 text-white rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl ring-4 ring-white dark:ring-slate-950">
                 Most Popular
               </div>
             )}
 
-            <div className="mb-8">
-              <h2 className={`text-2xl font-black mb-4 ${plan.popular ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
+            <div className="mb-10">
+              <h2 className={`text-3xl font-black mb-6 tracking-tighter ${plan.popular ? 'text-red-600 dark:text-red-400' : 'text-slate-950 dark:text-white'}`}>
                 {plan.name}
               </h2>
               <div className="flex items-baseline gap-1">
-                <span className={`text-5xl font-black ${plan.popular ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
+                <span className={`text-6xl font-black tracking-tighter ${plan.popular ? 'text-slate-950 dark:text-white' : 'text-slate-950 dark:text-white'}`}>
                   ${isYearly ? plan.yearlyPrice : plan.monthlyPrice}
                 </span>
-                <span className="text-zinc-500 text-sm">/mo</span>
+                <span className="text-slate-500 text-sm font-bold uppercase tracking-widest">/mo</span>
               </div>
               {isYearly && plan.monthlyPrice > 0 && (
-                <p className="text-emerald-500 text-xs font-bold mt-2">Billed annually</p>
+                <p className="text-emerald-500 text-xs font-black mt-3 uppercase tracking-widest">Billed annually</p>
               )}
             </div>
 
-            <ul className="space-y-4 mb-10">
+            <ul className="space-y-5 mb-12">
               {plan.features.map((feature) => (
-                <li key={feature} className="flex items-center gap-3 text-sm">
-                  <div className={`p-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400`}>
-                    <FiCheck className="w-3 h-3" />
+                <li key={feature} className="flex items-center gap-4 text-sm font-semibold tracking-tight">
+                  <div className="p-1.5 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                    <FiCheck className="w-3.5 h-3.5" />
                   </div>
-                  <span className={plan.popular ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}>
+                  <span className="text-slate-600 dark:text-slate-400">
                     {feature}
                   </span>
                 </li>
@@ -130,10 +130,10 @@ const PricingPage = () => {
 
             <button
               onClick={() => toast.success("Secure checkout opening...", { icon: '🔒' })}
-              className={`w-full py-4 rounded-full font-black text-sm transition-all hover:scale-[1.02] active:scale-95 shadow-lg ${
+              className={`w-full py-5 rounded-[2rem] font-black text-sm uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95 shadow-xl ${
                 plan.popular 
-                  ? 'bg-white text-zinc-900 shadow-white/10 hover:bg-zinc-100' 
-                  : 'bg-indigo-600 text-white shadow-indigo-600/20 hover:bg-indigo-700'
+                  ? 'bg-red-600 text-white shadow-red-600/30 hover:bg-red-700' 
+                  : 'bg-white dark:bg-slate-800 text-slate-950 dark:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm'
               }`}
             >
               {plan.button}
@@ -143,26 +143,26 @@ const PricingPage = () => {
       </div>
 
       {/* FAQ Section */}
-      <div className="max-w-3xl mx-auto border-t border-zinc-200 dark:border-zinc-800 pt-20">
-        <h2 className="text-4xl font-black text-center text-zinc-900 dark:text-white mb-12">
-          Frequently Asked <span className="text-indigo-600">Questions</span>
+      <div className="max-w-4xl mx-auto border-t border-slate-200/50 dark:border-slate-800/50 pt-24 mb-20">
+        <h2 className="text-5xl md:text-6xl font-black text-center text-slate-950 dark:text-white mb-16 tracking-tighter leading-[1.1]">
+          Frequently Asked <br /> <span className="text-red-600">Questions</span>
         </h2>
         
         <div className="space-y-4">
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden"
+              className="rounded-[2rem] border border-slate-200/50 dark:border-slate-800/50 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-red-500/30"
             >
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full p-6 flex items-center justify-between text-left"
+                className="w-full p-8 flex items-center justify-between text-left"
               >
-                <span className="font-bold text-zinc-900 dark:text-white">{faq.q}</span>
-                <FiChevronDown className={`w-5 h-5 transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
+                <span className="text-lg font-bold text-slate-950 dark:text-white tracking-tight">{faq.q}</span>
+                <FiChevronDown className={`w-6 h-6 transition-transform duration-500 ${openFaq === idx ? 'rotate-180' : ''} text-red-500`} />
               </button>
-              <div className={`transition-all duration-300 overflow-hidden ${openFaq === idx ? 'max-h-40 p-6 pt-0' : 'max-h-0'}`}>
-                <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+              <div className={`transition-all duration-500 ease-in-out overflow-hidden ${openFaq === idx ? 'max-h-60 p-8 pt-0' : 'max-h-0'}`}>
+                <p className="text-slate-500 dark:text-slate-400 text-base leading-relaxed font-semibold tracking-tight">
                   {faq.a}
                 </p>
               </div>

@@ -16,13 +16,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 transition-colors duration-300">
+      <body className="antialiased selection:bg-indigo-500/30" suppressHydrationWarning>
         <Providers>
-          <Navbar />
-          <main className="grow">
-            {children}
-          </main>
-          <ConditionalFooter />
+          <div id="app-root" className="flex flex-col min-h-screen relative">
+            <div className="bg-gradient-mesh" />
+            <Navbar />
+            <main className="grow relative z-10">
+              {children}
+            </main>
+            <ConditionalFooter />
+          </div>
         </Providers>
       </body>
     </html>

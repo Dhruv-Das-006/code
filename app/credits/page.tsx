@@ -7,34 +7,34 @@ import Link from 'next/link';
 const CreditsPage = () => {
   return (
     <div className="container mx-auto px-4 py-20 max-w-3xl">
-      <h1 className="text-4xl font-bold text-zinc-900 dark:text-white mb-8 flex items-center gap-3">
-        <FiHeart className="text-red-500 fill-red-500" />
+      <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-4 tracking-tighter">
+        <FiHeart className="text-red-600 fill-red-600 animate-pulse" />
         Credits
       </h1>
       
       <div className="space-y-12 transition-colors duration-300">
         <section>
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-4">Development Team</h2>
-          <div className="flex items-center gap-4 bg-white dark:bg-zinc-900 p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-100 dark:shadow-none">
-            <div className="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center text-white">
-              <FiUser className="w-8 h-8" />
+          <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-[10px]">Development Team</h2>
+          <div className="flex items-center gap-6 bg-white dark:bg-red-950/20 p-8 rounded-[40px] border border-slate-200 dark:border-red-500/20 shadow-xl shadow-red-600/5">
+            <div className="w-20 h-20 rounded-full bg-red-600 flex items-center justify-center text-white shadow-lg shadow-red-600/30">
+              <FiUser className="w-10 h-10" />
             </div>
             <div>
-              <p className="font-bold text-xl text-zinc-900 dark:text-white">Dhruv Das</p>
-              <p className="text-zinc-500 dark:text-zinc-400">Lead Developer & Designer</p>
-              <div className="mt-2 text-xs space-y-1">
-                <p className="text-indigo-600 dark:text-indigo-400 font-medium whitespace-nowrap">dhruvdas006@gmail.com</p>
-                <p className="text-zinc-400">+91 8092404100</p>
+              <p className="font-black text-2xl text-slate-900 dark:text-white tracking-tighter">Dhruv Das</p>
+              <p className="text-slate-500 dark:text-slate-400 font-semibold italic">Lead Developer & Designer</p>
+              <div className="mt-3 space-y-1">
+                <p className="text-red-600 dark:text-red-400 font-black text-xs tracking-widest">dhruvdas006@gmail.com</p>
+                <p className="text-black dark:text-white text-xs font-bold font-mono r">+91 8092404100</p>
               </div>
             </div>
           </div>
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-4">Technologies Used</h2>
+          <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-[10px]">Technologies Used</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {['Next.js 15', 'React 19', 'Tailwind CSS v4', 'Lucide Icons', 'Vercel', 'Next Themes'].map((tech) => (
-              <div key={tech} className="px-4 py-3 rounded-2xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium flex items-center justify-center border border-zinc-200 dark:border-zinc-700">
+            {['Next.js 15', 'React 19', 'Tailwind CSS v4', 'React-Icons', 'Vercel', 'Next Themes'].map((tech) => (
+              <div key={tech} className="px-6 py-4 rounded-2xl bg-slate-50 dark:bg-red-950/10 text-slate-700 dark:text-slate-300 text-xs font-black uppercase tracking-widest flex items-center justify-center border border-slate-200 dark:border-red-500/20 shadow-sm transition-all hover:scale-105 active:scale-95">
                 {tech}
               </div>
             ))}
@@ -49,8 +49,8 @@ const CreditsPage = () => {
         </section>
       </div>
 
-      <div className="mt-12 pt-12 border-t border-zinc-200 dark:border-zinc-800">
-        <Link href="/" className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">
+      <div className="mt-12 pt-12 border-t border-slate-200 dark:border-red-900/20">
+        <Link href="/" className="text-red-600 dark:text-red-400 font-black text-sm uppercase tracking-widest hover:underline underline-offset-4">
           Back to Home
         </Link>
       </div>

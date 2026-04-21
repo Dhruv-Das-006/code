@@ -55,7 +55,7 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               <Link
-                href="https://github.com"
+                href="https://github.com/Dhruv-Das-006/code.git"
                 className="p-2.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 hover:border-red-600 transition-all duration-300 shadow-sm"
                 aria-label="GitHub"
               >

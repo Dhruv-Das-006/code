@@ -7,6 +7,9 @@ import ConditionalFooter from "@/components/ConditionalFooter";
 export const metadata: Metadata = {
   title: "D-Code | Online Code Editor",
   description: "A premium online coding environment for modern developers.",
+  icons: {
+    icon: '/favico.ico',
+  },
 };
 
 export default function RootLayout({

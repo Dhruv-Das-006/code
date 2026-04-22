@@ -18,7 +18,7 @@ const EditorPage = () => {
       {/* Decorative Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-500/10 rounded-full blur-[120px] -z-10 animate-pulse" />
       
-      <div className="p-10 rounded-[3rem] bg-white/40 dark:bg-red-950/20 backdrop-blur-2xl border border-red-500/10 dark:border-red-500/10 shadow-2xl shadow-red-600/5 mb-12 group transition-all duration-700 hover:scale-105">
+      <div className="p-10 rounded-[3rem] bg-white/40 dark:bg-red-950/20 backdrop-blur-2xl border border-red-500/10 dark:border-white shadow-2xl shadow-red-600/5 mb-12 group transition-all duration-700 hover:scale-105">
         <FiCode className="w-20 h-20 text-red-600 dark:text-red-400 group-hover:rotate-12 transition-transform duration-700" />
       </div>
       

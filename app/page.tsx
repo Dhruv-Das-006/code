@@ -30,24 +30,6 @@ const Home = () => {
       icon: <FiLayout />,
       color: "from-pink-500 to-rose-500",
     },
-    {
-      title: "Enterprise Security",
-      desc: "Bank-grade encryption for your source code and data. Two-factor authentication supported.",
-      icon: <FiShield />,
-      color: "from-red-500 to-rose-600",
-    },
-    {
-      title: "Version History",
-      desc: "Automatic snapshots of your code so you can revert back to any point in time.",
-      icon: <FiClock />,
-      color: "from-orange-400 to-amber-600",
-    },
-    {
-      title: "Custom Themes",
-      desc: "Personalize your editing environment with dozens of custom dark and light themes.",
-      icon: <FiSettings />,
-      color: "from-teal-400 to-emerald-500",
-    }
   ];
 
   return (

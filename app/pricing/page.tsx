@@ -130,7 +130,7 @@ const PricingPage = () => {
 
             <button
               onClick={() => toast.success("Secure checkout opening...", { icon: '🔒' })}
-              className={`w-full py-5 rounded-[2rem] font-black text-sm uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95 shadow-xl ${
+              className={`w-full py-5 rounded-4xl font-black text-sm uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95 shadow-xl ${
                 plan.popular 
                   ? 'bg-red-600 text-white shadow-red-600/30 hover:bg-red-700' 
                   : 'bg-white dark:bg-slate-800 text-slate-950 dark:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm'
@@ -152,7 +152,7 @@ const PricingPage = () => {
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className="rounded-[2rem] border border-slate-200/50 dark:border-slate-800/50 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-red-500/30"
+              className="rounded-4xl border border-slate-200/50 dark:border-slate-800/50 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-red-500/30"
             >
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}

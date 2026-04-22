@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { FiHeart, FiCode, FiUser } from 'react-icons/fi';
+import { FiHeart, FiUser } from 'react-icons/fi';
 import Link from 'next/link';
 
 const CreditsPage = () => {
@@ -11,7 +11,6 @@ const CreditsPage = () => {
         <FiHeart className="text-red-600 fill-red-600 animate-pulse" />
         Credits
       </h1>
-      
       <div className="space-y-12 transition-colors duration-300">
         <section>
           <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-[10px]">Development Team</h2>

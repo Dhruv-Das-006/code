@@ -68,12 +68,6 @@ const Home = () => {
               <FiPlay className="w-6 h-6 fill-current" />
               Get Started
             </Link>
-            <Link
-              href="/signup"
-              className="w-full sm:w-auto px-12 py-6 rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-950 dark:text-white font-black text-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all hover:scale-105 active:scale-95 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-slate-300 backdrop-blur-sm"
-            >
-              Learn More
-            </Link>
           </div>
         </div>
       </section>

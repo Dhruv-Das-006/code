@@ -2,33 +2,51 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { FiPlay, FiZap, FiLayout, FiGlobe, FiCpu } from 'react-icons/fi';
+import { FiPlay, FiZap, FiLayout, FiGlobe, FiCpu, FiShield, FiClock, FiSettings } from 'react-icons/fi';
 
 const Home = () => {
   const cards = [
     {
-      title: "Real-time Collaboration",
-      desc: "Code together with your team in real-time with zero latency. Share links and start coding.",
+      title: "Real-time Sync",
+      desc: "Instant synchronization across all your devices and collaborators. No more manual saves.",
       icon: <FiZap />,
-      color: "from-red-600 to-rose-600",
+      color: "from-blue-500 to-indigo-500",
     },
     {
-      title: "Fast Compilation",
-      desc: "Instant feedback for HTML, CSS, and JS. See your changes reflected immediately as you type.",
+      title: "Powerful Compiler",
+      desc: "Optimized build engine for HTML, CSS, and JS with instant live updates and HMR.",
       icon: <FiCpu />,
-      color: "from-orange-600 to-red-600",
+      color: "from-indigo-500 to-purple-600",
+    },
+    {
+      title: "Global CDN",
+      desc: "Your apps are hosted on a lightning-fast global edge network for minimum latency.",
+      icon: <FiGlobe />,
+      color: "from-emerald-400 to-emerald-600",
     },
     {
       title: "Responsive Previews",
-      desc: "Test your code across various screen sizes with built-in device simulation tools.",
+      desc: "Built-in device simulation tools to test your work across mobile, tablet, and desktop.",
       icon: <FiLayout />,
-      color: "from-rose-600 to-pink-600",
+      color: "from-pink-500 to-rose-500",
     },
     {
-      title: "Cloud Sync",
-      desc: "Save your projects to the cloud and access them from anywhere in the world, on any device.",
-      icon: <FiGlobe />,
-      color: "from-red-500 to-orange-500",
+      title: "Enterprise Security",
+      desc: "Bank-grade encryption for your source code and data. Two-factor authentication supported.",
+      icon: <FiShield />,
+      color: "from-red-500 to-rose-600",
+    },
+    {
+      title: "Version History",
+      desc: "Automatic snapshots of your code so you can revert back to any point in time.",
+      icon: <FiClock />,
+      color: "from-orange-400 to-amber-600",
+    },
+    {
+      title: "Custom Themes",
+      desc: "Personalize your editing environment with dozens of custom dark and light themes.",
+      icon: <FiSettings />,
+      color: "from-teal-400 to-emerald-500",
     }
   ];
 

@@ -5,10 +5,8 @@ import { FaDiscord, FaSlack } from 'react-icons/fa';
 
 const CommunityPage = () => {
   const channels = [
-    { title: "Discord", desc: "Real-time discussions", icon: <FaDiscord />, members: "12k members", color: "bg-red-600" },
-    { title: "GitHub", desc: "Open source contributions", icon: <FiGithub />, members: "5k stars", color: "bg-slate-900" },
-    { title: "Twitter", desc: "Latest news & updates", icon: <FiTwitter />, members: "25k followers", color: "bg-rose-500" },
-    { title: "Slack", desc: "Professional networking", icon: <FaSlack />, members: "3k pros", color: "bg-orange-600" },
+    { title: "Discord", desc: "Real-time discussions", icon: <FaDiscord />, members: "12k members", color: "bg-red-600", url: "https://discord.com" },
+    { title: "GitHub", desc: "Open source contributions", icon: <FiGithub />, members: "5k stars", color: "bg-slate-900", url: "https://github.com/Dhruv-Das-006/code.git" },
   ];
 
   return (
@@ -39,9 +37,9 @@ const CommunityPage = () => {
               </div>
             </div>
             <p className="text-slate-500 dark:text-slate-400 font-semibold leading-relaxed mb-8">{ch.desc}</p>
-            <button className="flex items-center gap-2 font-black text-sm uppercase tracking-widest text-slate-900 dark:text-white group-hover:text-red-600 transition-colors">
+            <a href={ch.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-black text-sm uppercase tracking-widest text-slate-900 dark:text-white group-hover:text-red-600 transition-colors w-fit">
               Join Channel <FiMessageCircle />
-            </button>
+            </a>
           </div>
         ))}
       </div>

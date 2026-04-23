@@ -63,7 +63,7 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link
               href="/editor"
-              className="w-full sm:w-auto px-12 py-6 rounded-[2rem] bg-red-600 hover:bg-red-700 text-white font-black text-xl shadow-2xl shadow-red-600/30 transition-all hover:scale-105 active:scale-95 
+              className="w-full sm:w-auto px-12 py-6 rounded-4xl bg-red-600 hover:bg-red-700 text-white font-black text-xl shadow-2xl shadow-red-600/30 transition-all hover:scale-105 active:scale-95 
               flex items-center justify-center gap-3"
             >
               <FiPlay className="w-6 h-6 fill-current" />
@@ -71,7 +71,7 @@ const Home = () => {
             </Link>
             <Link
               href="/features"
-              className="w-full sm:w-auto px-12 py-6 rounded-[2rem] bg-white dark:bg-slate-900 border
+              className="w-full sm:w-auto px-12 py-6 rounded-4xl bg-white dark:bg-slate-900 border
                border-slate-200 dark:border-slate-800 text-slate-950 dark:text-white font-black text-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all hover:scale-105 active:scale-95 shadow-[0_8px_30px_rgb(0,0,0,0.04)]
                hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-slate-300 backdrop-blur-sm flex items-center justify-center gap-3"
             >

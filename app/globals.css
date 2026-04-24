@@ -86,22 +86,22 @@ body {
 
 /* React Split */
 .gutter {
-  background-color: #f1f5f9;
+  background-color: transparent;
   background-repeat: no-repeat;
   background-position: 50%;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .dark .gutter {
-  background-color: #0f172a;
+  background-color: #05070a;
 }
 
 .gutter:hover {
-  background-color: #cbd5e1;
+  background-color: rgba(16, 185, 129, 0.1);
 }
 
 .dark .gutter:hover {
-  background-color: #1e293b;
+  background-color: rgba(16, 185, 129, 0.05);
 }
 
 .gutter.gutter-horizontal {
@@ -112,4 +112,14 @@ body {
 .gutter.gutter-vertical {
   cursor: row-resize;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="4" viewBox="0 0 24 4"><path fill="%2394a3b8" d="M0 0h24v1H0zm0 3h24v1H0z"/></svg>');
+}
+
+/* Hide scrollbars but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

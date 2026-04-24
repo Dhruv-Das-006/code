@@ -103,8 +103,12 @@ const editorSlice = createSlice({
     setActiveFile: (state, action: PayloadAction<string>) => {
       state.activeFileId = action.payload;
     },
+    loadFiles: (state, action: PayloadAction<EditorState>) => {
+      state.files = action.payload.files;
+      state.activeFileId = action.payload.activeFileId;
+    },
   },
 });
 
-export const { addFile, updateFile, renameFile, deleteFile, setActiveFile } = editorSlice.actions;
+export const { addFile, updateFile, renameFile, deleteFile, setActiveFile, loadFiles } = editorSlice.actions;
 export default editorSlice.reducer;

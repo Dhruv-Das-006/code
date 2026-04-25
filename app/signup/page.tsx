@@ -1,18 +1,50 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { FiCode, FiMail, FiLock, FiUser } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/store/authSlice';
+import { FiCode, FiMail, FiLock, FiUser, FiAtSign } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import toast from 'react-hot-toast';
 
 const SignupPage = () => {
-  const handleComingSoon = (e: React.FormEvent) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Signup coming soon!", {
-      icon: '✨',
-      id: "signup-toast",
-    });
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        dispatch(setUser(data.user));
+        toast.success("Account created!");
+        router.push('/editor');
+      } else {
+        toast.error(data.error || "Signup failed");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleGoogleClick = () => {
@@ -38,15 +70,30 @@ const SignupPage = () => {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleComingSoon} className="w-full space-y-4">
+        <form onSubmit={handleSignup} className="w-full space-y-4">
           <div className="relative group">
             <FiUser className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-500 transition-colors" />
             <input
               type="text"
               required
               placeholder="Your Name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full pl-14 pr-6 py-4 rounded-full bg-white/50 dark:bg-slate-800/30 border border-red-200 dark:border-red-500/30 focus:outline-none focus:ring-2 focus:ring-red-500/50 dark:focus:ring-red-400/50 text-sm transition-all text-slate-900 dark:text-white font-medium placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm"
               aria-label="Full Name"
+            />
+          </div>
+
+          <div className="relative group">
+            <FiAtSign className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-500 transition-colors" />
+            <input
+              type="text"
+              required
+              placeholder="Username"
+              value={formData.username}
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+              className="w-full pl-14 pr-6 py-4 rounded-full bg-white/50 dark:bg-slate-800/30 border border-red-200 dark:border-red-500/30 focus:outline-none focus:ring-2 focus:ring-red-500/50 dark:focus:ring-red-400/50 text-sm transition-all text-slate-900 dark:text-white font-medium placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm"
+              aria-label="Username"
             />
           </div>
 
@@ -56,6 +103,8 @@ const SignupPage = () => {
               type="email"
               required
               placeholder="name@example.com"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full pl-14 pr-6 py-4 rounded-full bg-white/50 dark:bg-slate-800/30 border border-red-200 dark:border-red-500/30 focus:outline-none focus:ring-2 focus:ring-red-500/50 dark:focus:ring-red-400/50 text-sm transition-all text-slate-900 dark:text-white font-medium placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm"
               aria-label="Email Address"
             />
@@ -67,6 +116,8 @@ const SignupPage = () => {
               type="password"
               required
               placeholder="Create a password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               className="w-full pl-14 pr-6 py-4 rounded-full bg-white/50 dark:bg-slate-800/30 border border-red-200 dark:border-red-500/30 focus:outline-none focus:ring-2 focus:ring-red-500/50 dark:focus:ring-red-400/50 text-sm transition-all text-slate-900 dark:text-white font-medium placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm"
               aria-label="Password"
             />
@@ -74,9 +125,10 @@ const SignupPage = () => {
 
           <button
             type="submit"
-            className="w-full py-4.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-black text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 transition-all hover:scale-[1.02] active:scale-95 mt-4"
+            disabled={loading}
+            className="w-full py-4.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-black text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 transition-all hover:scale-[1.02] active:scale-95 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Create Account
+            {loading ? 'Creating Account...' : 'Create Account'}
           </button>
         </form>
 
@@ -109,3 +161,4 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+

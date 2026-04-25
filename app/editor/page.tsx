@@ -6,7 +6,7 @@ import { RootState } from '@/store/store';
 import { addFile, updateFile, renameFile, deleteFile, setActiveFile, loadFiles, FileType } from '@/store/editorSlice';
 import Editor from '@monaco-editor/react';
 import Split from 'react-split';
-import { FiFileText, FiPlus, FiTrash2, FiEdit2, FiCode, FiTerminal, FiTrash, FiSave } from 'react-icons/fi';
+import { FiFileText, FiPlus, FiTrash2, FiEdit2, FiCode, FiTerminal, FiTrash, FiSave, FiMonitor, FiSmartphone, FiAlertCircle, FiX } from 'react-icons/fi';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { useTheme } from 'next-themes';
@@ -18,11 +18,25 @@ const EditorPage = () => {
   const { files, activeFileId } = useSelector((state: RootState) => state.editor);
   const activeFile = files.find(f => f.id === activeFileId);
   const { theme, systemTheme } = useTheme();
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Handle mounting and mobile detection
+  useEffect(() => {
+    setMounted(true);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedFiles = localStorage.getItem('arena-editor-files');
-    const savedActiveId = localStorage.getItem('arena-editor-active-id');
+    if (!mounted) return;
+    const savedFiles = localStorage.getItem('dcode-editor-files');
+    const savedActiveId = localStorage.getItem('dcode-editor-active-id');
     
     if (savedFiles) {
       try {
@@ -46,7 +60,7 @@ const EditorPage = () => {
   const [logs, setLogs] = useState<{method: string, args: any[]}[]>([]);
 
   const handleEditorWillMount = (monaco: any) => {
-    monaco.editor.defineTheme('arena-dark', {
+    monaco.editor.defineTheme('dcode-dark', {
       base: 'vs-dark',
       inherit: true,
       rules: [
@@ -65,8 +79,8 @@ const EditorPage = () => {
   const handleSave = () => {
     setIsSaving(true);
     // Save to localStorage
-    localStorage.setItem('arena-editor-files', JSON.stringify(files));
-    localStorage.setItem('arena-editor-active-id', activeFileId || '');
+    localStorage.setItem('dcode-editor-files', JSON.stringify(files));
+    localStorage.setItem('dcode-editor-active-id', activeFileId || '');
     
     setTimeout(() => {
       setIsSaving(false);
@@ -144,11 +158,51 @@ const EditorPage = () => {
      }
   };
 
+  if (mounted && isMobile) {
+    return (
+      <div className={`min-h-[calc(100vh-64px)] flex items-center justify-center p-6 text-center ${
+        currentTheme === 'light' ? 'bg-slate-50 text-slate-900' : 'bg-[#05070a] text-slate-300'
+      }`}>
+        <div className="max-w-md w-full space-y-8 animate-in fade-in zoom-in duration-500">
+          <div className="relative flex justify-center">
+            <div className="p-8 rounded-[2.5rem] bg-red-600/10 dark:bg-red-500/10 border-2 border-red-500/20 relative">
+              <FiMonitor className="w-16 h-16 text-red-600 dark:text-red-500" />
+              <div className="absolute -bottom-2 -right-2 p-2 rounded-full bg-white dark:bg-slate-900 border-2 border-red-500 shadow-lg">
+                <FiX className="w-4 h-4 text-red-500" />
+              </div>
+            </div>
+            <FiSmartphone className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 text-slate-400 opacity-20 rotate-12" />
+          </div>
+
+          <div className="space-y-4">
+            <h1 className="text-3xl font-black tracking-tighter uppercase">Desktop Only</h1>
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 leading-relaxed">
+              The D-Code IDE is a powerful coding environment designed for large screens. Please switch to a <span className="text-red-600 dark:text-red-500 font-bold uppercase tracking-widest">Laptop or Desktop</span> to start building your projects.
+            </p>
+          </div>
+
+          <div className="pt-4 flex flex-col gap-4">
+            <Link 
+              href="/"
+              className="w-full py-4 rounded-full bg-red-600 hover:bg-red-700 text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-red-600/20 transition-all hover:scale-[1.02] active:scale-95"
+            >
+              Back to Home
+            </Link>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2">
+              <FiAlertCircle /> Mobile coding not supported
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`h-[calc(100vh-64px)] flex flex-col overflow-hidden font-sans selection:bg-emerald-500/30 transition-colors duration-300 ${
       currentTheme === 'light' ? 'bg-slate-50 text-slate-900' : 'bg-[#05070a] text-slate-300'
     }`}>
       <div className="flex-1 flex p-4 gap-4 overflow-hidden relative">
+        {/* ... (Existing Editor Page Content) */}
         {/* MAIN CONTAINER (Rounded) */}
         <div className={`flex-1 rounded-[2.5rem] border flex overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-300 ${
           currentTheme === 'light' 
@@ -261,7 +315,7 @@ const EditorPage = () => {
                       <Editor
                         height="100%"
                         language={getLanguage(activeFile.type)}
-                        theme={currentTheme === 'light' ? 'light' : 'arena-dark'}
+                        theme={currentTheme === 'light' ? 'light' : 'dcode-dark'}
                         beforeMount={handleEditorWillMount}
                         value={activeFile.content}
                         onChange={(value) => dispatch(updateFile({ id: activeFile.id, content: value || '' }))}

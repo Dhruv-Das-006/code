@@ -17,11 +17,11 @@ const ResultPage = () => {
   
   // Hydrate from localStorage on mount
   useEffect(() => {
-    const savedFiles = localStorage.getItem('arena-editor-files');
-    const savedActiveId = localStorage.getItem('arena-editor-active-id');
-    const savedRadius = localStorage.getItem('arena-result-radius');
-    const savedColor = localStorage.getItem('arena-result-color');
-    const savedBg = localStorage.getItem('arena-result-bg');
+    const savedFiles = localStorage.getItem('dcode-editor-files');
+    const savedActiveId = localStorage.getItem('dcode-editor-active-id');
+    const savedRadius = localStorage.getItem('dcode-result-radius');
+    const savedColor = localStorage.getItem('dcode-result-color');
+    const savedBg = localStorage.getItem('dcode-result-bg');
     
     if (savedRadius) setBorderRadius(parseInt(savedRadius));
     if (savedColor) setBorderColor(savedColor);
@@ -41,9 +41,9 @@ const ResultPage = () => {
 
   // Persist settings
   useEffect(() => {
-    localStorage.setItem('arena-result-radius', borderRadius.toString());
-    localStorage.setItem('arena-result-color', borderColor);
-    localStorage.setItem('arena-result-bg', backgroundColor);
+    localStorage.setItem('dcode-result-radius', borderRadius.toString());
+    localStorage.setItem('dcode-result-color', borderColor);
+    localStorage.setItem('dcode-result-bg', backgroundColor);
   }, [borderRadius, borderColor, backgroundColor]);
 
   const srcDoc = useMemo(() => generateSrcDoc(files), [files]);

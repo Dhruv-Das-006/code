@@ -15,6 +15,7 @@ async function dbConnect() {
   const MONGODB_URI = process.env.MONGODB_URI;
 
   if (!MONGODB_URI) {
+    console.error('❌ MONGODB_URI is missing in environment variables');
     throw new Error('Please define the MONGODB_URI environment variable inside .env');
   }
 
@@ -25,10 +26,19 @@ async function dbConnect() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
     };
 
+    console.log('🔄 Connecting to MongoDB...');
     cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
+      console.log('✅ MongoDB Connected');
       return mongoose;
+    }).catch((err) => {
+      console.error('❌ MongoDB Connection Error:', err.message);
+      cached.promise = null;
+      throw err;
     });
   }
 

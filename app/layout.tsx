@@ -6,7 +6,25 @@ import ConditionalFooter from "@/components/ConditionalFooter";
 
 export const metadata: Metadata = {
   title: "D-Code | Online Code Editor",
-  description: "A premium online coding environment for modern developers.",
+  description: "A premium online coding environment for modern developers. Build, test, and ship code faster.",
+  keywords: ["online code editor", "ide", "web development", "javascript editor", "react ide"],
+  authors: [{ name: "D-Code Team" }],
+  openGraph: {
+    title: "D-Code | Online Code Editor",
+    description: "A premium online coding environment for modern developers.",
+    url: "https://dhruv-code.vercel.app",
+    siteName: "D-Code",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "D-Code | Online Code Editor",
+    description: "A premium online coding environment for modern developers.",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

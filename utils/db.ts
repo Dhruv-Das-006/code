@@ -15,8 +15,9 @@ async function dbConnect() {
   const MONGODB_URI = process.env.MONGODB_URI;
 
   if (!MONGODB_URI) {
-    console.error('❌ MONGODB_URI is missing in environment variables');
-    throw new Error('Please define the MONGODB_URI environment variable inside .env');
+    const errorMsg = '❌ MONGODB_URI is missing in environment variables. Please ensure it is set in your .env file (local) or Vercel Project Settings (production).';
+    console.error(errorMsg);
+    throw new Error(errorMsg);
   }
 
   if (cached.conn) {

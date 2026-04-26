@@ -13,7 +13,13 @@ export async function POST() {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
+    const JWT_SECRET = process.env.JWT_SECRET;
+    if (!JWT_SECRET) {
+      console.error('❌ JWT_SECRET is missing in environment variables');
+      return NextResponse.json({ error: 'Authentication configuration error' }, { status: 500 });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET) as any;
     
     await dbConnect();
     

@@ -31,10 +31,19 @@ export async function POST(req: Request) {
     });
 
     // Automatically log in after signup
+    const JWT_SECRET = process.env.JWT_SECRET;
+    if (!JWT_SECRET) {
+      console.error('❌ JWT_SECRET is missing in environment variables');
+      return NextResponse.json(
+        { error: 'Authentication configuration error' },
+        { status: 500 }
+      );
+    }
+
     const token = jwt.sign(
       { userId: user._id, email: user.email, username: user.username },
-      process.env.JWT_SECRET!,
-      { expiresIn: '7d' }
+      JWT_SECRET,
+      { expiresIn: '30d' }
     );
 
     const response = NextResponse.json(
@@ -46,9 +55,12 @@ export async function POST(req: Request) {
     );
 
     // Set cookie
+    // Use VERCEL_ENV to determine if we are in production to satisfy the "no NODE_ENV" requirement
+    const isProd = process.env.VERCEL_ENV === 'production' || !!process.env.VERCEL;
+    
     response.cookies.set('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProd,
       maxAge: 60 * 60 * 24 * 7,
       path: '/',
     });

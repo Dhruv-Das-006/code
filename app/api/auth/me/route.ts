@@ -13,7 +13,13 @@ export async function GET() {
       return NextResponse.json({ authenticated: false }, { status: 200 });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
+    const JWT_SECRET = process.env.JWT_SECRET;
+    if (!JWT_SECRET) {
+      console.error('❌ JWT_SECRET is missing in environment variables');
+      return NextResponse.json({ authenticated: false }, { status: 200 });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET) as any;
     
     await dbConnect();
     const user = await User.findById(decoded.userId).select('-password');

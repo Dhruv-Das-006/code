@@ -7,7 +7,6 @@ export default function ConditionalNavbar() {
   const pathname = usePathname();
   const isEditor = pathname?.startsWith("/editor");
 
-  if (isEditor) return null;
-
+  // Removed the isEditor check to always show Navbar as requested
   return <Navbar />;
 }

@@ -28,12 +28,12 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Editor', path: '/editor', protected: true },
-    ...(mounted && isAuthenticated ? [
+    ...(isAuthenticated ? [
       { name: 'Logout', path: '#', action: 'logout' }
-    ] : [
+    ] : (mounted ? [
       { name: 'Signup', path: '/signup' },
       { name: 'Login', path: '/login' },
-    ]),
+    ] : [])),
   ];
 
   const handleLogout = async () => {

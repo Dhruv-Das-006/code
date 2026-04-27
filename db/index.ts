@@ -2,22 +2,23 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import * as schema from './schema';
 
-// Lazy initialization to prevent build-time errors when env vars are missing
-let queryClient: any;
+// Simplified lazy initialization
 let dbInstance: any;
 
 export const getDb = () => {
-  if (!process.env.DATABASE_URL) {
-    throw new Error('DATABASE_URL environment variable is not set');
-  }
   if (!dbInstance) {
-    queryClient = postgres(process.env.DATABASE_URL);
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL environment variable is not set');
+    }
+    const queryClient = postgres(process.env.DATABASE_URL, {
+      ssl: 'require', // Ensure SSL is used as requested by Neon URL
+    });
     dbInstance = drizzle(queryClient, { schema });
   }
   return dbInstance;
 };
 
-// Export a proxy or just the function
+// Export db as a getter to ensure it's always initialized correctly
 export const db = new Proxy({} as any, {
   get: (target, prop) => {
     return getDb()[prop];

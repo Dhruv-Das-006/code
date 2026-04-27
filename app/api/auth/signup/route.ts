@@ -55,8 +55,8 @@ export async function POST(req: Request) {
     // Set cookie
     response.cookies.set('token', token, {
       httpOnly: true,
-      secure: true,
-      maxAge: 60 * 60 * 24 * 7,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 60 * 60 * 24 * 30, // 30 days to match token expiry
       path: '/',
     });
 

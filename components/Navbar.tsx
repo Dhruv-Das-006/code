@@ -14,6 +14,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [logoutLoading, setLogoutLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -35,6 +37,7 @@ const Navbar = () => {
   ];
 
   const handleLogout = async () => {
+    setLogoutLoading(true);
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
       dispatch(logoutAction());
@@ -42,6 +45,8 @@ const Navbar = () => {
       router.push('/');
     } catch (error) {
       toast.error("Logout failed");
+    } finally {
+      setLogoutLoading(false);
     }
   };
 
@@ -55,6 +60,7 @@ const Navbar = () => {
           <button
             onClick={async () => {
               toast.dismiss(t.id);
+              setDeleteLoading(true);
               try {
                 const res = await fetch('/api/auth/delete-account', { method: 'POST' });
                 if (res.ok) {
@@ -66,8 +72,11 @@ const Navbar = () => {
                 }
               } catch (error) {
                 toast.error("An error occurred");
+              } finally {
+                setDeleteLoading(false);
               }
             }}
+            disabled={deleteLoading}
             className="px-4 py-2 bg-red-600 text-white text-[10px] font-black rounded-lg hover:bg-red-700 transition-colors uppercase tracking-widest"
           >
             Confirm
@@ -81,7 +90,7 @@ const Navbar = () => {
         </div>
       </div>
     ), {
-      duration: 5000,
+      duration: 1000,
       position: 'top-center',
       style: {
         borderRadius: '1.5rem',
@@ -170,7 +179,8 @@ const Navbar = () => {
                     
                     <button
                       onClick={handleDeleteAccount}
-                      className="flex items-center gap-3 text-xs font-black text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 p-3 rounded-2xl transition-all"
+                      disabled={deleteLoading}
+                      className="flex items-center gap-3 text-xs font-black text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 p-3 rounded-2xl transition-all disabled:opacity-50"
                     >
                       <FiTrash2 className="w-4 h-4" />
                       DELETE ACCOUNT

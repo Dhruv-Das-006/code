@@ -1,29 +1,28 @@
 import { NextResponse } from 'next/server';
-import dbConnect from '@/utils/db';
-import User from '@/models/User';
-import bcrypt from 'bcryptjs';
+import { db } from '@/db';
+import { users } from '@/db/schema';
+import { eq } from 'drizzle-orm';
+import { hash } from '@node-rs/bcrypt';
 
 export async function POST(req: Request) {
   try {
-    await dbConnect();
     const { username, newPassword } = await req.json();
 
-    // Find user by username
-    const user = await User.findOne({ username });
-    if (!user) {
+    // Hash new password (using high-performance @node-rs/bcrypt)
+    const hashedPassword = await hash(newPassword, 10);
+
+    // Update password (using returning to check if user existed)
+    const result = await db.update(users)
+      .set({ password: hashedPassword, updatedAt: new Date() })
+      .where(eq(users.username, username))
+      .returning();
+
+    if (result.length === 0) {
       return NextResponse.json(
         { error: 'User not found' },
         { status: 404 }
       );
     }
-
-    // Hash new password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
-
-    // Update password
-    user.password = hashedPassword;
-    await user.save();
 
     return NextResponse.json(
       { message: 'Password updated successfully' },

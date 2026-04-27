@@ -11,7 +11,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <Provider store={store}>
       <AuthWrapper>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Toaster position="top-center" />
+          <Toaster 
+            position="top-center" 
+            toastOptions={{
+              duration: 1000,
+            }}
+          />
           {children}
         </ThemeProvider>
       </AuthWrapper>

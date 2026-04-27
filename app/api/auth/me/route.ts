@@ -1,6 +1,4 @@
 import { NextResponse } from 'next/server';
-import dbConnect from '@/utils/db';
-import User from '@/models/User';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
@@ -13,20 +11,14 @@ export async function GET() {
       return NextResponse.json({ authenticated: false }, { status: 200 });
     }
 
-    const JWT_SECRET = process.env.JWT_SECRET;
-    if (!JWT_SECRET) {
-      console.error('❌ JWT_SECRET is missing in environment variables');
-      return NextResponse.json({ authenticated: false }, { status: 200 });
-    }
-
-    const decoded = jwt.verify(token, JWT_SECRET) as any;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
     
-    await dbConnect();
-    const user = await User.findById(decoded.userId).select('-password');
-
-    if (!user) {
-      return NextResponse.json({ authenticated: false }, { status: 200 });
-    }
+    const user = {
+      id: decoded.userId,
+      username: decoded.username,
+      name: decoded.name,
+      email: decoded.email,
+    };
 
     return NextResponse.json({ user, authenticated: true }, { status: 200 });
   } catch (error) {

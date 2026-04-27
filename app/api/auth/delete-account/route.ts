@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-import dbConnect from '@/utils/db';
-import User from '@/models/User';
+import { db } from '@/db';
+import { users } from '@/db/schema';
+import { eq } from 'drizzle-orm';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
@@ -13,18 +14,10 @@ export async function POST() {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
 
-    const JWT_SECRET = process.env.JWT_SECRET;
-    if (!JWT_SECRET) {
-      console.error('❌ JWT_SECRET is missing in environment variables');
-      return NextResponse.json({ error: 'Authentication configuration error' }, { status: 500 });
-    }
-
-    const decoded = jwt.verify(token, JWT_SECRET) as any;
-    
-    await dbConnect();
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
     
     // Delete user from DB
-    await User.findByIdAndDelete(decoded.userId);
+    await db.delete(users).where(eq(users.id, decoded.userId));
 
     const response = NextResponse.json({ message: 'Account deleted' });
     

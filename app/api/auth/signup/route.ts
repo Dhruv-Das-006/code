@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { db } from '@/db';
 import { users } from '@/db/schema';
 import { eq, or } from 'drizzle-orm';
@@ -52,12 +53,14 @@ export async function POST(req: Request) {
       { status: 201 }
     );
 
-    // Set cookie
-    response.cookies.set('token', token, {
+    // Set cookie using next/headers for better reliability in App Router
+    const cookieStore = await cookies();
+    cookieStore.set('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24 * 30, // 30 days to match token expiry
+      maxAge: 60 * 60 * 24 * 30, // 30 days
       path: '/',
+      sameSite: 'lax',
     });
 
     return response;
